@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "scrambled": ["MEMBACA", "SAYA", "BUKU"],
+        "targetPattern": "S-P-O"
+    },
+    {
+        "id": 2,
+        "scrambled": ["IBU", "DI DAPUR", "MEMASAK", "NASI"],
+        "targetPattern": "S-P-O-K"
+    },
+    {
+        "id": 3,
+        "scrambled": ["BELAJAR", "BUDI"],
+        "targetPattern": "S-P"
+    }
+]
