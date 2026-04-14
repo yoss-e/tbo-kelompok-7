@@ -6,7 +6,7 @@ function evaluasiCFG(inputKalimat) {
     let cleanInput = inputKalimat.toUpperCase().trim().replace(/\s+/g, ' ');
     
     // Penanganan khusus untuk kata keterangan yang memiliki spasi (contoh: "DI KELAS")
-    // Dalam implementasi nyata, disarankan menggunakan algoritma POS Tagging yang lebih advanced (seperti LALR/CYK di jurnal Anda)
+    // Dalam implementasi nyata, disarankan menggunakan algoritma POS Tagging yang lebih advanced
     // Untuk prototipe ini, kita identifikasi frasa Keterangan terlebih dahulu.
     let tags = [];
     let isMatch = false;
