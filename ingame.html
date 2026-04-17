@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Kalimatku - Belajar Kalimat Efektif</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed-dim": "#eea840",
+            "outline-variant": "#acadaf",
+            "surface-dim": "#d2d4d8",
+            "primary-container": "#ff766b",
+            "on-error-container": "#510017",
+            "on-tertiary-fixed-variant": "#644000",
+            "surface-container-highest": "#dbdde0",
+            "on-secondary-fixed-variant": "#5a5c5c",
+            "on-tertiary-fixed": "#3d2500",
+            "on-tertiary": "#fff0e2",
+            "secondary": "#5a5c5c",
+            "on-primary-container": "#4f0004",
+            "outline": "#757779",
+            "secondary-fixed": "#e2e2e2",
+            "surface-container": "#e7e8ea",
+            "error": "#b41340",
+            "primary-fixed": "#ff766b",
+            "tertiary": "#7f5200",
+            "on-tertiary-container": "#583700",
+            "surface-bright": "#f6f6f8",
+            "secondary-dim": "#4e5050",
+            "surface-tint": "#b7131a",
+            "on-primary": "#ffefed",
+            "on-surface-variant": "#5a5c5d",
+            "on-primary-fixed-variant": "#600005",
+            "tertiary-container": "#feb64c",
+            "on-secondary-fixed": "#3e4040",
+            "surface-container-low": "#f0f1f3",
+            "secondary-container": "#e2e2e2",
+            "primary": "#b7131a",
+            "on-secondary-container": "#505252",
+            "surface": "#f6f6f8",
+            "inverse-primary": "#ff544b",
+            "on-secondary": "#f2f3f3",
+            "on-surface": "#2d2f31",
+            "error-dim": "#a70138",
+            "secondary-fixed-dim": "#d4d4d4",
+            "inverse-surface": "#0c0e10",
+            "tertiary-dim": "#6f4700",
+            "surface-variant": "#dbdde0",
+            "on-error": "#ffefef",
+            "surface-container-lowest": "#ffffff",
+            "background": "#f6f6f8",
+            "error-container": "#f74b6d",
+            "on-primary-fixed": "#000000",
+            "surface-container-high": "#e1e2e5",
+            "on-background": "#2d2f31",
+            "tertiary-fixed": "#feb64c",
+            "primary-fixed-dim": "#ff5a51",
+            "primary-dim": "#a40010",
+            "inverse-on-surface": "#9c9d9f"
+          },
+          "borderRadius": {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "headline": ["Plus Jakarta Sans"],
+            "body": ["Plus Jakarta Sans"],
+            "label": ["Plus Jakarta Sans"]
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .btn-press:active {
+      transform: translateY(2px);
+    }
+
+    .heart-shadow {
+      filter: drop-shadow(0 8px 12px rgba(180, 19, 64, 0.2));
+    }
+  </style>
+</head>
+
+<body class="bg-surface min-h-screen flex flex-col items-center overflow-x-hidden">
+  <!-- Top Navigation Bar -->
+  <header
+    class="fixed top-0 w-full z-50 flex justify-center items-center px-6 py-4 bg-[#f6f6f8]/80 backdrop-blur-xl border-b border-surface-container">
+    <div class="w-full max-w-2xl flex justify-between items-center">
+      <div class="flex items-center gap-4 flex-1">
+        <button
+          class="material-symbols-outlined text-on-surface hover:bg-surface-container rounded-full p-2 transition-colors">close</button>
+        <div class="h-4 w-full max-w-[192px] bg-surface-container-high rounded-full overflow-hidden">
+          <div class="h-full w-2/3 bg-gradient-to-r from-primary to-primary-container rounded-full"></div>
+        </div>
+      </div>
+      <div class="flex items-center gap-6 ml-4">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-error-container heart-shadow" data-icon="favorite"
+            style="font-variation-settings: 'FILL' 1;">favorite</span>
+          <span class="font-bold text-on-surface">3</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-tertiary-fixed-dim" data-icon="local_fire_department"
+            style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+          <span class="font-bold text-on-surface">12</span>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main class="flex-1 w-full max-w-2xl px-6 pt-32 pb-40 flex flex-col">
+    <!-- Question Section -->
+    <div class="mb-12">
+      <h1 class="text-on-surface text-2xl font-extrabold mb-8 leading-tight">
+        Ubah kalimat berikut menjadi kalimat efektif:
+      </h1>
+      <!-- Prompt Card -->
+      <div
+        class="relative bg-surface-container-lowest rounded-xl p-8 mb-12 shadow-[0_8px_0_0_#e7e8ea] border-2 border-surface-container">
+        <div class="absolute -top-6 -left-2 transform -rotate-6">
+          <div
+            class="bg-primary text-on-primary px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">
+            Kalimat Asal</div>
+        </div>
+        <p class="text-on-surface text-xl font-medium leading-relaxed italic">
+          "Dia pergi ke pasar belanja sayur."
+        </p>
+        <div class="mt-4 flex gap-2">
+          <span class="px-3 py-1 bg-error/10 text-error text-xs font-bold rounded-full">Tidak Efektif</span>
+        </div>
+      </div>
+      <!-- Short Answer Input Field -->
+      <div class="relative group">
+        <label class="block text-on-surface-variant text-sm font-bold uppercase tracking-wider mb-3 ml-2"
+          for="answer-input">Jawaban Anda</label>
+        <textarea
+          class="w-full min-h-[160px] bg-surface-container-lowest p-6 rounded-2xl border-2 border-surface-container text-xl font-medium text-on-surface placeholder:text-outline-variant focus:border-primary-container focus:ring-4 focus:ring-primary/10 transition-all duration-200 shadow-[0_8px_0_0_#e7e8ea] outline-none resize-none"
+          id="answer-input" placeholder="Tulis kalimat efektif di sini..."></textarea>
+        <div class="absolute bottom-4 right-4 text-outline-variant text-sm font-bold">
+          <span class="material-symbols-outlined text-base align-middle mr-1">edit_note</span>
+          Indonesian
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- Feedback Drawer (Placeholder State: Hidden/Visible via class) -->
+  <!-- Add 'translate-y-0' and 'opacity-100' to show -->
+  <div
+    class="fixed bottom-0 left-0 w-full bg-white dark:bg-zinc-900 border-t-2 border-surface-container p-6 transform translate-y-full transition-transform duration-500 z-[60]">
+    <div class="max-w-2xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center">
+          <span class="material-symbols-outlined text-green-600 text-3xl font-black">check</span>
+        </div>
+        <div>
+          <h3 class="text-green-700 text-xl font-black">Luar Biasa!</h3>
+          <p class="text-green-600 font-medium">Kalimat Anda sekarang lebih efektif.</p>
+        </div>
+      </div>
+      <button
+        class="bg-green-500 hover:bg-green-600 text-white px-10 py-4 rounded-lg font-black uppercase tracking-wider shadow-[0_4px_0_0_#166534] active:translate-y-1 active:shadow-none transition-all">Lanjut</button>
+    </div>
+  </div>
+  <!-- Bottom Action Bar (Permanent) -->
+  <div
+    class="fixed bottom-0 w-full bg-surface-container-lowest/80 backdrop-blur-md px-6 py-8 border-t border-surface-container">
+    <div class="max-w-2xl mx-auto flex items-center gap-4">
+      <button
+        class="flex-1 bg-gradient-to-b from-primary to-primary-container text-on-primary rounded-lg py-5 text-lg font-black uppercase tracking-widest shadow-[0_6px_0_0_#600005] btn-press transition-all">
+        Periksa
+      </button>
+    </div>
+  </div>
+  <!-- Decorative Illustration (Floating Character Style) -->
+  <div class="fixed bottom-40 right-10 hidden xl:block pointer-events-none transform rotate-12 opacity-80">
+    <div class="w-48 h-48 bg-surface-container-high rounded-xl flex items-center justify-center">
+      <img alt="Indonesian Flag Mascot" class="w-24 h-24"
+        data-alt="cute stylized 2D cartoon mascot representing Indonesia with red and white colors and a friendly face"
+        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYZavEtN6oPQFNFhs6L6JlTBVQfMz2HSG1QkDiL3O25kYf9ZPwUlNtA9bX30K09l8trxSP6xCllFjerJpuDzgoiEhiOlD82AR4drsCv75HJQNYUekOATBxTODLzOgMevNepNGqUASbmgCu8RNN1zIH1u7ul7E9DbM4Qv3vWWUeyuWI826lO7QYOW3BBHDBygkItr1QDUrNQb5MOFcm5FeDqGCJNi4sbaOuXXUMDg3BWU-6jB7tMskOGeeta2BRhBr7b3oToso45faD" />
+    </div>
+  </div>
+</body>
+
+</html>

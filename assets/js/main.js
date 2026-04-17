@@ -1,119 +1,140 @@
-// Variabel Status Game
 let currentLevel = 0;
 let lives = 3;
 let score = 0;
 let levelData = [];
 
 // Elemen DOM
-const soalContainer = document.getElementById('soal-container');
-const userInput = document.getElementById('user-input');
+const teksSoalDisplay = document.getElementById('teks-soal');
+const userInput = document.getElementById('answer-input');
 const btnCheck = document.getElementById('btn-check');
-const feedbackPanel = document.getElementById('feedback-panel');
+const livesDisplay = document.getElementById('lives-display');
+const scoreDisplay = document.getElementById('score-display');
+const progressBar = document.getElementById('progress-bar');
+
+const feedbackDrawer = document.getElementById('feedback-drawer');
+const feedbackIconContainer = document.getElementById('feedback-icon-bg');
+const feedbackIcon = document.getElementById('feedback-icon');
 const feedbackTitle = document.getElementById('feedback-title');
 const feedbackDesc = document.getElementById('feedback-desc');
-const livesDisplay = document.getElementById('lives');
-const scoreDisplay = document.getElementById('score');
-const progressFill = document.getElementById('progress');
+const btnNext = document.getElementById('btn-next');
 
-// Karena browser membatasi fetch() untuk file lokal (CORS), kita bypass untuk prototipe dengan variabel biasa
-// Jika di-hosting (XAMPP/Vercel/GitHub Pages), Anda bisa gunakan fetch('data/levels.json')
-const dummyLevels = [
-    { id: 1, scrambled: ["MEMBACA", "SAYA", "BUKU"], target: "S-P-O" },
-    { id: 2, scrambled: ["IBU", "DI DAPUR", "MEMASAK", "NASI"], target: "S-P-O-K" },
-    { id: 3, scrambled: ["BELAJAR", "BUDI"], target: "S-P" }
-];
+// GENERATOR SOAL ACAK LINTAS TEMA & TRANSITIF/INTRANSITIF
+function buatSoalAcak(jumlahSoal) {
+    const polaValid = ['S-P', 'S-P-O', 'S-P-K', 'S-P-O-K'];
+    let bankSoal = [];
+
+    for(let i = 0; i < jumlahSoal; i++) {
+        const polaTarget = polaValid[Math.floor(Math.random() * polaValid.length)];
+        const tags = polaTarget.split('-');
+        
+        // Ambil tema acak dari dictionary.js
+        const temaTerpilih = dataKamus[Math.floor(Math.random() * dataKamus.length)];
+
+        // Ambil kata dari tema yang terpilih
+        let kataBenar = tags.map(tag => {
+            const daftarKata = temaTerpilih[tag];
+            return daftarKata[Math.floor(Math.random() * daftarKata.length)];
+        });
+
+        // Acak posisinya (menjadi kalimat tidak efektif)
+        let kataAcak = [...kataBenar];
+        for (let j = kataAcak.length - 1; j > 0; j--) {
+            const k = Math.floor(Math.random() * (j + 1));
+            [kataAcak[j], kataAcak[k]] = [kataAcak[k], kataAcak[j]]; 
+        }
+
+        // Cegah acakan yang kebetulan berurutan benar
+        if (kataAcak.join(' ') === kataBenar.join(' ') && kataAcak.length > 1) {
+            [kataAcak[0], kataAcak[1]] = [kataAcak[1], kataAcak[0]];
+        }
+
+        bankSoal.push({
+            id: i + 1,
+            kalimatAsal: kataAcak.join(' ').toLowerCase(),
+            target: polaTarget
+        });
+    }
+    return bankSoal;
+}
 
 function initGame() {
-    levelData = dummyLevels;
+    levelData = buatSoalAcak(5); 
     muatSoal();
 }
 
 function muatSoal() {
     if(currentLevel >= levelData.length) {
-        alert(`Selamat! Kamu menyelesaikan game dengan skor ${score}`);
+        alert(`Selesai! Total XP: ${score}`);
         return;
     }
 
-    // Reset UI
     userInput.value = "";
-    feedbackPanel.classList.remove('show', 'feedback-correct', 'feedback-wrong');
-    btnCheck.className = "btn primary";
-    btnCheck.innerText = "PERIKSA";
+    // Reset styling (Mendukung struktur HTML Tailwind/Custom yang Anda pakai)
+    feedbackDrawer.className = "feedback-drawer"; 
+    btnCheck.disabled = false;
     btnCheck.onclick = periksaJawaban;
 
-    // Tampilkan kata acak
     const data = levelData[currentLevel];
-    soalContainer.innerHTML = "";
-    data.scrambled.forEach(word => {
-        const span = document.createElement('span');
-        span.className = 'word-badge';
-        span.innerText = word;
-        soalContainer.appendChild(span);
-    });
-
-    // Update Progress
-    const progressPercent = (currentLevel / levelData.length) * 100;
-    progressFill.style.width = `${progressPercent}%`;
+    teksSoalDisplay.innerText = `"${data.kalimatAsal}"`;
+    
+    if (progressBar) progressBar.style.width = `${(currentLevel / levelData.length) * 100}%`;
 }
 
 function periksaJawaban() {
-    const jawaban = userInput.value;
-    if(jawaban.trim() === "") return;
+    const jawaban = userInput.value.trim();
+    if(jawaban === "") return;
 
-    // Memanggil fungsi dari engine.js
-    const hasilEvaluasi = evaluasiCFG(jawaban);
-
-    feedbackPanel.classList.add('show');
+    btnCheck.disabled = true; 
     
+    const hasilEvaluasi = evaluasiCFG(jawaban); 
+
+    feedbackDrawer.classList.add('show');
+
     if (hasilEvaluasi.valid) {
-        // BENAR
-        feedbackPanel.classList.add('feedback-correct');
+        feedbackDrawer.classList.add('theme-correct');
+        feedbackDrawer.classList.remove('theme-wrong');
+        
+        if(feedbackIcon) feedbackIcon.innerText = "check";
         feedbackTitle.innerText = "Luar Biasa!";
-        feedbackDesc.innerText = hasilEvaluasi.pesan;
-        
-        btnCheck.className = "btn correct";
-        btnCheck.innerText = "LANJUTKAN";
-        score += 100;
-        scoreDisplay.innerText = `⭐ ${score}`;
-        
-        btnCheck.onclick = () => {
+        feedbackDesc.innerText = `Pola: ${hasilEvaluasi.pola}`;
+        btnNext.innerText = "LANJUT";
+
+        score += 120;
+        if (scoreDisplay) scoreDisplay.innerText = score;
+
+        btnNext.onclick = () => {
             currentLevel++;
             muatSoal();
         };
+
     } else {
-        // SALAH
-        feedbackPanel.classList.add('feedback-wrong');
-        feedbackTitle.innerText = "Aduh, Kurang Tepat!";
+        feedbackDrawer.classList.add('theme-wrong');
+        feedbackDrawer.classList.remove('theme-correct');
+        
+        if(feedbackIcon) feedbackIcon.innerText = "close";
+        feedbackTitle.innerText = "Kurang Tepat!";
         feedbackDesc.innerText = hasilEvaluasi.pesan;
-        
-        btnCheck.className = "btn wrong";
-        btnCheck.innerText = "COBA LAGI";
-        
+        btnNext.innerText = "COBA LAGI";
+
         kurangiNyawa();
-        
-        btnCheck.onclick = () => {
-            feedbackPanel.classList.remove('show', 'feedback-wrong');
-            btnCheck.className = "btn primary";
-            btnCheck.innerText = "PERIKSA";
-            btnCheck.onclick = periksaJawaban;
+
+        btnNext.onclick = () => {
+            feedbackDrawer.classList.remove('show');
+            btnCheck.disabled = false;
+            userInput.focus();
         };
     }
 }
 
 function kurangiNyawa() {
     lives--;
-    let hearts = "";
-    for(let i=0; i<lives; i++) hearts += "❤️";
-    for(let i=lives; i<3; i++) hearts += "🤍"; // Nyawa hilang
-    livesDisplay.innerText = hearts;
-
+    if (livesDisplay) livesDisplay.innerText = lives;
     if(lives <= 0) {
         setTimeout(() => {
-            alert("Game Over! Nyawa kamu habis.");
-            location.reload(); // Restart game
+            alert("Game Over! XP yang terkumpul: " + score);
+            location.reload();
         }, 500);
     }
 }
 
-// Mulai Game
 window.onload = initGame;
