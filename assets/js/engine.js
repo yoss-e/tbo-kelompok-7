@@ -1,25 +1,20 @@
-// Aturan Produksi CFG yang valid untuk Bahasa Indonesia Baku
+// Aturan Produksi CFG Dasar
 const validRules = ['S-P', 'S-P-O', 'S-P-K', 'S-P-O-K'];
 
 function evaluasiCFG(inputKalimat) {
-    // 1. Preprocessing (Case Folding & Bersihkan spasi berlebih)
     let cleanInput = inputKalimat.toUpperCase().trim().replace(/\s+/g, ' ');
-    
-    // Penanganan khusus untuk kata keterangan yang memiliki spasi (contoh: "DI KELAS")
-    // Dalam implementasi nyata, disarankan menggunakan algoritma POS Tagging yang lebih advanced (seperti LALR/CYK di jurnal Anda)
-    // Untuk prototipe ini, kita identifikasi frasa Keterangan terlebih dahulu.
     let tags = [];
-    let isMatch = false;
     let foundK = "";
 
+    // 1. Ekstrak Keterangan
     lexicon['K'].forEach(ket => {
         if (cleanInput.includes(ket)) {
             foundK = ket;
-            cleanInput = cleanInput.replace(ket, "").trim(); // Pisahkan keterangan
+            cleanInput = cleanInput.replace(ket, "").trim();
         }
     });
 
-    // 2. Tokenizing (Memecah kata yang tersisa)
+    // 2. Tokenizing
     const words = cleanInput.split(' ').filter(w => w !== "");
 
     // 3. Tagging (Menandai S, P, O)
@@ -32,19 +27,18 @@ function evaluasiCFG(inputKalimat) {
                 break;
             }
         }
-        if (!tagged) tags.push('?'); // Kata tidak dikenal
+        if (!tagged) tags.push('?');
     });
 
-    // Masukkan kembali tag Keterangan jika ada di akhir
     if (foundK !== "") tags.push('K');
 
-    // 4. Parsing (Mencocokkan dengan Aturan Valid)
+    // 4. Parsing Evaluasi Pola
     const polaDitemukan = tags.join('-');
     const isValid = validRules.includes(polaDitemukan);
 
     return {
         valid: isValid,
         pola: polaDitemukan,
-        pesan: isValid ? `Struktur Tepat! (${polaDitemukan})` : `Struktur Salah atau kata tidak dikenal (${polaDitemukan}). Harus sesuai CFG: S-P, S-P-O, atau S-P-O-K.`
+        pesan: isValid ? `Struktur Tepat!` : `Struktur tidak valid (${polaDitemukan}). Ingat aturan: S-P, S-P-O, S-P-K, atau S-P-O-K.`
     };
 }

@@ -1,39 +1,74 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalimatku - Belajar CFG</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalimatku - Belajar Kalimat Efektif</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <div class="app-container">
-        <header class="game-header">
-            <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
-            <div class="stats">
-                <span id="lives">❤️❤️❤️</span>
-                <span id="score">⭐ 0</span>
-            </div>
-        </header>
-
-        <main class="game-area">
-            <h2>Susun menjadi kalimat yang efektif!</h2>
-            
-            <div class="scrambled-words" id="soal-container">
+    <header class="top-nav">
+        <div class="nav-container">
+            <div class="nav-left">
+                <button class="btn-close material-symbols-outlined">close</button>
+                <div class="progress-container">
+                    <div id="progress-bar" class="progress-fill"></div>
                 </div>
-
-            <div class="input-area">
-                <input type="text" id="user-input" placeholder="Ketik jawabanmu di sini..." autocomplete="off">
             </div>
-        </main>
-
-        <footer class="game-footer">
-            <div id="feedback-panel" class="feedback-panel hidden">
-                <h3 id="feedback-title">Benar!</h3>
-                <p id="feedback-desc">Pola: S-P-O</p>
+            <div class="nav-right">
+                <div class="stat-item">
+                    <span class="material-symbols-outlined icon-heart">favorite</span>
+                    <span id="lives-display">3</span>
+                </div>
+                <div class="stat-item">
+                    <span class="material-symbols-outlined icon-fire">local_fire_department</span>
+                    <span id="score-display">0</span>
+                </div>
             </div>
-            <button id="btn-check" class="btn primary">PERIKSA</button>
-        </footer>
+        </div>
+    </header>
+
+    <main class="main-area">
+        <h1 class="question-title">Ubah kalimat berikut menjadi kalimat efektif:</h1>
+        
+        <div class="prompt-card">
+            <div class="badge-asal">KALIMAT ASAL</div>
+            <p id="teks-soal" class="teks-soal">"..."</p>
+            <div class="badge-status">Tidak Efektif</div>
+        </div>
+
+        <div class="input-section">
+            <label for="answer-input">JAWABAN ANDA</label>
+            <textarea id="answer-input" placeholder="Tulis kalimat efektif di sini..."></textarea>
+            <div class="input-footer">
+                <span class="material-symbols-outlined">edit_note</span> Indonesian
+            </div>
+        </div>
+    </main>
+
+    <div id="feedback-drawer" class="feedback-drawer">
+        <div class="drawer-container">
+            <div class="feedback-info">
+                <div id="feedback-icon-bg" class="icon-bg">
+                    <span id="feedback-icon" class="material-symbols-outlined">check</span>
+                </div>
+                <div class="feedback-text">
+                    <h3 id="feedback-title">Luar Biasa!</h3>
+                    <p id="feedback-desc">Pola: S-P-O</p>
+                </div>
+            </div>
+            <button id="btn-next" class="btn-action">LANJUT</button>
+        </div>
+    </div>
+
+    <div class="bottom-bar">
+        <div class="bottom-container">
+            <button id="btn-check" class="btn-primary">PERIKSA</button>
+        </div>
     </div>
 
     <script src="assets/js/dictionary.js"></script>
