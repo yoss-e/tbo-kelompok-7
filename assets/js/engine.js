@@ -3,13 +3,6 @@ const validRules = ['S-P', 'S-P-O', 'S-P-K', 'S-P-O-K'];
 
 function evaluasiCFG(inputKalimat) {
     let cleanInput = inputKalimat.toUpperCase().trim().replace(/\s+/g, ' ');
-<<<<<<< HEAD
-    
-    // Penanganan khusus untuk kata keterangan yang memiliki spasi (contoh: "DI KELAS")
-    // Dalam implementasi nyata, disarankan menggunakan algoritma POS Tagging yang lebih advanced
-    // Untuk prototipe ini, kita identifikasi frasa Keterangan terlebih dahulu.
-=======
->>>>>>> testing
     let tags = [];
     let foundK = "";
 
