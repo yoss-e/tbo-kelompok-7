@@ -6,6 +6,8 @@ const resultAccuracy = document.getElementById('result-accuracy');
 const reviewList = document.getElementById('review-list');
 
 const savedResult = JSON.parse(localStorage.getItem('kalimatkuResult') || 'null');
+const resultAudio = new Audio('assets/audio/ingame.mp3');
+let resultAudioStarted = false;
 
 function escapeHtml(value) {
     return String(value)
@@ -97,4 +99,54 @@ if (savedResult) {
     renderResult(savedResult);
 } else {
     renderEmptyState();
+}
+
+setupResultAudio();
+
+function setupResultAudio() {
+    resultAudio.loop = true;
+    resultAudio.volume = 0.32;
+    resultAudio.muted = localStorage.getItem('kalimatkuAudioMuted') === 'true';
+
+    const shouldContinueAudio = sessionStorage.getItem('kalimatkuContinueAudio') === 'true';
+    const savedAudioTime = Number(sessionStorage.getItem('kalimatkuAudioTime') || 0);
+    sessionStorage.removeItem('kalimatkuContinueAudio');
+
+    if (Number.isFinite(savedAudioTime) && savedAudioTime > 0) {
+        resultAudio.addEventListener('loadedmetadata', () => {
+            resultAudio.currentTime = Math.min(savedAudioTime, resultAudio.duration || savedAudioTime);
+        }, { once: true });
+    }
+
+    window.addEventListener('pointerdown', mulaiAudioResult, { once: true });
+    window.addEventListener('keydown', mulaiAudioResult, { once: true });
+    window.addEventListener('pagehide', hentikanAudioResult);
+    window.addEventListener('beforeunload', hentikanAudioResult);
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) hentikanAudioResult();
+    });
+
+    if (shouldContinueAudio) {
+        window.setTimeout(mulaiAudioResult, 120);
+    }
+}
+
+function mulaiAudioResult() {
+    if (resultAudio.muted || resultAudioStarted) return;
+
+    resultAudio.play()
+        .then(() => {
+            resultAudioStarted = true;
+        })
+        .catch(() => {
+            resultAudioStarted = false;
+        });
+}
+
+function hentikanAudioResult() {
+    resultAudio.pause();
+    if (Number.isFinite(resultAudio.duration)) {
+        resultAudio.currentTime = 0;
+    }
+    resultAudioStarted = false;
 }

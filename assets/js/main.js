@@ -99,8 +99,14 @@ function muatSoal() {
     const data = levelData[currentLevel];
     teksSoalDisplay.innerText = `"${data.kalimatAsal}"`;
     
-    if (progressBar) progressBar.style.width = `${(currentLevel / levelData.length) * 100}%`;
+    perbaruiProgress(currentLevel + 1);
     window.setTimeout(() => userInput.focus(), 80);
+}
+
+function perbaruiProgress(jumlahTerjawab) {
+    if (!progressBar || levelData.length === 0) return;
+
+    progressBar.style.width = `${(jumlahTerjawab / levelData.length) * 100}%`;
 }
 
 function periksaJawaban() {
@@ -146,17 +152,23 @@ function periksaJawaban() {
         feedbackDesc.innerText = hasilEvaluasi.valid
             ? `Pola terdeteksi ${hasilEvaluasi.pola}, tetapi target soal adalah ${data.target}.`
             : hasilEvaluasi.pesan;
-        btnNext.innerText = "COBA LAGI";
+        btnNext.innerText = lives <= 1 ? "LIHAT HASIL" : "LANJUT";
 
         correctStreak = 0;
         perbaruiTampilanStreak();
         animasiJawabanSalah();
-        kurangiNyawa();
+        simpanReviewJawaban(false, jawaban, hasilEvaluasi);
+        const gameOver = kurangiNyawa();
 
         btnNext.onclick = () => {
-            feedbackDrawer.classList.remove('show');
-            btnCheck.disabled = false;
-            userInput.focus();
+            if (gameOver) {
+                simpanHasilPermainan(false);
+                pindahHalaman("result.html");
+                return;
+            }
+
+            currentLevel++;
+            muatSoal();
         };
     }
 }
@@ -164,15 +176,7 @@ function periksaJawaban() {
 function kurangiNyawa() {
     lives--;
     if (livesDisplay) livesDisplay.innerText = lives;
-    if(lives <= 0) {
-        const jawaban = userInput.value.trim();
-        const hasilEvaluasi = evaluasiCFG(jawaban);
-        simpanReviewJawaban(false, jawaban, hasilEvaluasi);
-        setTimeout(() => {
-            simpanHasilPermainan(false);
-            pindahHalaman("result.html");
-        }, 850);
-    }
+    return lives <= 0;
 }
 
 function ulangAnimasi(element, className, removeAfter = 0) {
@@ -297,7 +301,13 @@ if (userInput) {
 }
 
 function pindahHalaman(url) {
-    hentikanAudioIngame();
+    if (url === "result.html") {
+        lanjutkanAudioKeResult();
+    } else {
+        sessionStorage.removeItem('kalimatkuContinueAudio');
+        sessionStorage.removeItem('kalimatkuAudioTime');
+        hentikanAudioIngame();
+    }
 
     if (window.navigateWithTransition) {
         window.navigateWithTransition(url);
@@ -315,6 +325,11 @@ function setupAudioIngame() {
 
     window.addEventListener('pointerdown', mulaiAudioIngame, { once: true });
     window.addEventListener('keydown', mulaiAudioIngame, { once: true });
+    window.addEventListener('pagehide', () => hentikanAudioIngame());
+    window.addEventListener('beforeunload', () => hentikanAudioIngame());
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) hentikanAudioIngame();
+    });
 
     if (btnAudio) {
         btnAudio.addEventListener('click', toggleAudioIngame);
@@ -336,11 +351,23 @@ function mulaiAudioIngame() {
         })
         .catch(() => {
             ingameAudioStarted = false;
-        });
+    });
+}
+
+function lanjutkanAudioKeResult() {
+    const shouldContinueAudio = !ingameAudio.muted && (ingameAudioStarted || !ingameAudio.paused);
+
+    sessionStorage.setItem('kalimatkuContinueAudio', shouldContinueAudio ? 'true' : 'false');
+    sessionStorage.setItem('kalimatkuAudioTime', String(ingameAudio.currentTime || 0));
+    hentikanAudioIngame();
 }
 
 function hentikanAudioIngame() {
     ingameAudio.pause();
+    if (Number.isFinite(ingameAudio.duration)) {
+        ingameAudio.currentTime = 0;
+    }
+    ingameAudioStarted = false;
 }
 
 function toggleAudioIngame() {
