@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalimatku - Dashboard</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="dashboard-page">
+    <main class="dashboard-shell">
+        <section class="dashboard-hero">
+            <div class="hero-copy">
+                <p class="eyebrow">Belajar Kalimat Efektif</p>
+                <h1>Kalimatku</h1>
+                <p class="hero-desc">Latih susunan S-P-O-K dengan soal acak, cek jawaban langsung, lalu lihat ulasan permainan setelah selesai.</p>
+                <div class="hero-actions">
+                    <a class="btn-primary btn-link" href="index.html">
+                        <span class="material-symbols-outlined">play_arrow</span>
+                        MULAI
+                    </a>
+                    <a class="btn-secondary btn-link" href="result.html">
+                        <span class="material-symbols-outlined">analytics</span>
+                        HASIL
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual" aria-hidden="true">
+                <img src="assets/img/mascot.svg" alt="" />
+            </div>
+        </section>
+
+        <section class="dashboard-grid" aria-label="Ringkasan permainan">
+            <article class="info-card">
+                <span class="material-symbols-outlined info-icon icon-fire">local_fire_department</span>
+                <h2>5 Soal</h2>
+                <p>Setiap ronde berisi kalimat acak yang perlu disusun menjadi pola efektif.</p>
+            </article>
+            <article class="info-card">
+                <span class="material-symbols-outlined info-icon icon-heart">favorite</span>
+                <h2>3 Nyawa</h2>
+                <p>Jawaban salah mengurangi nyawa, jadi periksa pola sebelum menekan tombol.</p>
+            </article>
+            <article class="info-card">
+                <span class="material-symbols-outlined info-icon icon-green">fact_check</span>
+                <h2>Review</h2>
+                <p>Halaman hasil menampilkan skor, akurasi, dan daftar jawaban yang sudah dicoba.</p>
+            </article>
+        </section>
+    </main>
+    <script src="assets/js/page-transition.js"></script>
+</body>
+</html>

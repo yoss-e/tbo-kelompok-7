@@ -1,0 +1,15 @@
+<svg width="420" height="420" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="210" cy="210" r="176" fill="#FFF" stroke="#E7E8EA" stroke-width="8"/>
+  <circle cx="210" cy="210" r="142" fill="#F6F6F8"/>
+  <rect x="106" y="112" width="208" height="214" rx="26" fill="#B7131A"/>
+  <path d="M132 112h156c14.359 0 26 11.641 26 26v160H132c-14.359 0-26-11.641-26-26V138c0-14.359 11.641-26 26-26Z" fill="#FF766B"/>
+  <path d="M132 112h156c14.359 0 26 11.641 26 26v24H106v-24c0-14.359 11.641-26 26-26Z" fill="#B7131A"/>
+  <circle cx="158" cy="194" r="15" fill="#2D2F31"/>
+  <circle cx="262" cy="194" r="15" fill="#2D2F31"/>
+  <path d="M174 246c20 22 52 22 72 0" stroke="#2D2F31" stroke-width="14" stroke-linecap="round"/>
+  <rect x="140" y="284" width="140" height="18" rx="9" fill="#fff"/>
+  <rect x="142" y="146" width="40" height="10" rx="5" fill="#F2B33D"/>
+  <rect x="198" y="146" width="80" height="10" rx="5" fill="#fff"/>
+  <path d="M77 249c-14-5-22-20-17-34 4-12 16-20 28-19" stroke="#2563EB" stroke-width="14" stroke-linecap="round"/>
+  <path d="M343 249c14-5 22-20 17-34-4-12-16-20-28-19" stroke="#16A34A" stroke-width="14" stroke-linecap="round"/>
+</svg>

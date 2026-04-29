@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalimatku - Hasil Permainan</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="result-page">
+    <main class="result-shell">
+        <nav class="simple-nav">
+            <a class="nav-back" href="dashboard.html">
+                <span class="material-symbols-outlined">arrow_back</span>
+                Dashboard
+            </a>
+        </nav>
+
+        <section class="result-header">
+            <p class="eyebrow">Review Permainan</p>
+            <h1 id="result-title">Hasil Latihan</h1>
+            <p id="result-summary">Ringkasan permainan akan tampil setelah kamu menyelesaikan satu ronde.</p>
+        </section>
+
+        <section class="summary-grid" aria-label="Statistik hasil">
+            <article class="summary-card">
+                <div class="summary-heading">
+                    <span class="summary-icon xp material-symbols-outlined">local_fire_department</span>
+                    <span class="summary-label">XP</span>
+                </div>
+                <strong id="result-score">0</strong>
+            </article>
+            <article class="summary-card">
+                <div class="summary-heading">
+                    <span class="summary-icon correct material-symbols-outlined">check_circle</span>
+                    <span class="summary-label">Benar</span>
+                </div>
+                <strong id="result-correct">0/5</strong>
+            </article>
+            <article class="summary-card">
+                <div class="summary-heading">
+                    <span class="summary-icon accuracy material-symbols-outlined">target</span>
+                    <span class="summary-label">Akurasi</span>
+                </div>
+                <strong id="result-accuracy">0%</strong>
+            </article>
+        </section>
+
+        <section class="review-section">
+            <div class="section-heading">
+                <h2>Detail Jawaban</h2>
+                <a class="btn-secondary btn-link compact" href="index.html">
+                    <span class="material-symbols-outlined">replay</span>
+                    MAIN LAGI
+                </a>
+            </div>
+            <div id="review-list" class="review-list"></div>
+        </section>
+    </main>
+
+    <script src="assets/js/result.js"></script>
+    <script src="assets/js/page-transition.js"></script>
+</body>
+</html>

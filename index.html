@@ -14,12 +14,13 @@
     <header class="top-nav">
         <div class="nav-container">
             <div class="nav-left">
-                <button class="btn-close material-symbols-outlined">close</button>
+                <button id="btn-exit" class="btn-close material-symbols-outlined" title="Kembali ke dashboard">close</button>
                 <div class="progress-container">
                     <div id="progress-bar" class="progress-fill"></div>
                 </div>
             </div>
             <div class="nav-right">
+                <button id="btn-audio" class="btn-audio material-symbols-outlined" type="button" title="Matikan suara">volume_up</button>
                 <div class="stat-item">
                     <span class="material-symbols-outlined icon-heart">favorite</span>
                     <span id="lives-display">3</span>
@@ -43,7 +44,7 @@
 
         <div class="input-section">
             <label for="answer-input">JAWABAN ANDA</label>
-            <textarea id="answer-input" placeholder="Tulis kalimat efektif di sini..."></textarea>
+            <textarea id="answer-input" placeholder="Tulis kalimat efektif di sini..." rows="1" autofocus enterkeyhint="done"></textarea>
             <div class="input-footer">
                 <span class="material-symbols-outlined">edit_note</span> Indonesian
             </div>
@@ -74,5 +75,6 @@
     <script src="assets/js/dictionary.js"></script>
     <script src="assets/js/engine.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/page-transition.js"></script>
 </body>
 </html>
