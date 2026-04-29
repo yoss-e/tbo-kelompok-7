@@ -3,78 +3,54 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kalimatku - Belajar Kalimat Efektif</title>
-    
+    <title>Kalimatku - Dashboard</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-    
+
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
-    <header class="top-nav">
-        <div class="nav-container">
-            <div class="nav-left">
-                <button id="btn-exit" class="btn-close material-symbols-outlined" title="Kembali ke dashboard">close</button>
-                <div class="progress-container">
-                    <div id="progress-bar" class="progress-fill"></div>
+<body class="dashboard-page">
+    <main class="dashboard-shell">
+        <section class="dashboard-hero">
+            <div class="hero-copy">
+                <p class="eyebrow">Belajar Kalimat Efektif</p>
+                <h1>Kalimatku</h1>
+                <p class="hero-desc">Latih susunan S-P-O-K dengan soal acak, cek jawaban langsung, lalu lihat ulasan permainan setelah selesai.</p>
+                <div class="hero-actions">
+                    <a class="btn-primary btn-link" href="ingame.html">
+                        <span class="material-symbols-outlined">play_arrow</span>
+                        MULAI
+                    </a>
+                    <a class="btn-secondary btn-link" href="result.html">
+                        <span class="material-symbols-outlined">analytics</span>
+                        HASIL
+                    </a>
                 </div>
             </div>
-            <div class="nav-right">
-                <button id="btn-audio" class="btn-audio material-symbols-outlined" type="button" title="Matikan suara">volume_up</button>
-                <div class="stat-item">
-                    <span class="material-symbols-outlined icon-heart">favorite</span>
-                    <span id="lives-display">3</span>
-                </div>
-                <div class="stat-item">
-                    <span class="material-symbols-outlined icon-fire">local_fire_department</span>
-                    <span id="score-display">0</span>
-                </div>
+            <div class="hero-visual" aria-hidden="true">
+                <img src="assets/img/mascot.svg" alt="" />
             </div>
-        </div>
-    </header>
+        </section>
 
-    <main class="main-area">
-        <h1 class="question-title">Ubah kalimat berikut menjadi kalimat efektif:</h1>
-        
-        <div class="prompt-card">
-            <div class="badge-asal">KALIMAT ASAL</div>
-            <p id="teks-soal" class="teks-soal">"..."</p>
-            <div class="badge-status">Tidak Efektif</div>
-        </div>
-
-        <div class="input-section">
-            <label for="answer-input">JAWABAN ANDA</label>
-            <textarea id="answer-input" placeholder="Tulis kalimat efektif di sini..." rows="1" autofocus enterkeyhint="done"></textarea>
-            <div class="input-footer">
-                <span class="material-symbols-outlined">edit_note</span> Indonesian
-            </div>
-        </div>
+        <section class="dashboard-grid" aria-label="Ringkasan permainan">
+            <article class="info-card">
+                <span class="material-symbols-outlined info-icon icon-fire">local_fire_department</span>
+                <h2>5 Soal</h2>
+                <p>Setiap ronde berisi kalimat acak yang perlu disusun menjadi pola efektif.</p>
+            </article>
+            <article class="info-card">
+                <span class="material-symbols-outlined info-icon icon-heart">favorite</span>
+                <h2>3 Nyawa</h2>
+                <p>Jawaban salah mengurangi nyawa, jadi periksa pola sebelum menekan tombol.</p>
+            </article>
+            <article class="info-card">
+                <span class="material-symbols-outlined info-icon icon-green">fact_check</span>
+                <h2>Review</h2>
+                <p>Halaman hasil menampilkan skor, akurasi, dan daftar jawaban yang sudah dicoba.</p>
+            </article>
+        </section>
     </main>
-
-    <div id="feedback-drawer" class="feedback-drawer">
-        <div class="drawer-container">
-            <div class="feedback-info">
-                <div id="feedback-icon-bg" class="icon-bg">
-                    <span id="feedback-icon" class="material-symbols-outlined">check</span>
-                </div>
-                <div class="feedback-text">
-                    <h3 id="feedback-title">Luar Biasa!</h3>
-                    <p id="feedback-desc">Pola: S-P-O</p>
-                </div>
-            </div>
-            <button id="btn-next" class="btn-action">LANJUT</button>
-        </div>
-    </div>
-
-    <div class="bottom-bar">
-        <div class="bottom-container">
-            <button id="btn-check" class="btn-primary">PERIKSA</button>
-        </div>
-    </div>
-
-    <script src="assets/js/dictionary.js"></script>
-    <script src="assets/js/engine.js"></script>
-    <script src="assets/js/main.js"></script>
     <script src="assets/js/page-transition.js"></script>
 </body>
 </html>

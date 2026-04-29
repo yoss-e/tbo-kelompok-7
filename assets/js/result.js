@@ -24,7 +24,7 @@ function renderEmptyState() {
             <span class="material-symbols-outlined">sports_esports</span>
             <h3>Belum ada ronde selesai</h3>
             <p>Setelah permainan selesai atau nyawa habis, ringkasan jawaban akan muncul di sini.</p>
-            <a class="btn-primary btn-link" href="index.html">MULAI LATIHAN</a>
+            <a class="btn-primary btn-link" href="ingame.html">MULAI LATIHAN</a>
         </article>
     `;
 }

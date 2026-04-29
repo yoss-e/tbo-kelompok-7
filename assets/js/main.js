@@ -275,7 +275,7 @@ function simpanHasilPermainan(finished) {
 if (btnExit) {
     btnExit.addEventListener('click', () => {
         hentikanAudioIngame();
-        pindahHalaman("dashboard.html");
+        pindahHalaman("index.html");
     });
 }
 

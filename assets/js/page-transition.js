@@ -35,7 +35,7 @@ document.addEventListener('click', event => {
 
     if (nextUrl.origin !== currentUrl.origin || samePageHash) return;
 
-    if (nextUrl.pathname.endsWith('/index.html')) {
+    if (nextUrl.pathname.endsWith('/ingame.html')) {
         sessionStorage.setItem('kalimatkuStartAudio', 'true');
     }
 
